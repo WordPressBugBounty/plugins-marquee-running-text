@@ -3,10 +3,10 @@
 Plugin Name: Marquee Running Text
 Plugin URI: https://bongodevs.com/
 Description: Marquee Running Text plugin allows to make <strong> Marquee text at the top header</strong>, with fully customizable options. Most of all, it had to be responsive.
-Version: 1.1.3
+Version: 1.1.5
 Requires at least: 5.0
 Requires PHP: 5.6
-Author: Jahid Hasan
+Author: Bongdevs
 Author URI: http://bongdevs.com/about
 License: GPLv2 or later
 Text Domain: mrtext
@@ -33,19 +33,19 @@ function mrtext_admin_enqueue_scripts()
 add_action("admin_enqueue_scripts", "mrtext_admin_enqueue_scripts");
 
 
-/*
- * Settings Link
+/**
+ * Add Settings and Pro Upgrade Links
  */
 function mrtext_action_links( $links ) {
+    $settings_link = '<a href="' . esc_url( admin_url( 'admin.php?page=mrtext-settings' ) ) . '">' . __( 'Settings', 'mrtext' ) . '</a>';
+    $pro_link = '<a href="https://bongdevs.com/wp-assets/marquee-running-text-pro/" target="_blank" style="font-weight: bold; color: #A31C23;">' . __( 'Get Pro', 'mrtext' ) . '</a>';
 
-	$links = array_merge( array(
-		'<a href="' . esc_url( admin_url( 'admin.php?page=mrtext-settings' ) ) . '">' . __( 'Settings', 'mrtext' ) . '</a>'
-	), $links );
+    array_unshift( $links, $settings_link, $pro_link );
 
-	return $links;
-
+    return $links;
 }
-add_action( 'plugin_action_links_' . plugin_basename( __FILE__ ), 'mrtext_action_links' );
+add_filter( 'plugin_action_links_' . plugin_basename( __FILE__ ), 'mrtext_action_links' );
+
 
 /*
  * Plugin shortcode create

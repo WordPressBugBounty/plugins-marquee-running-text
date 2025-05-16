@@ -3,7 +3,7 @@ Contributors: jahid49, bongdevs
 Donate link: https://www.buymeacoffee.com/hasanjahid  
 Tags: marquee, running text, text slider, slider, admin  
 Requires at least: 5.0  
-Tested up to: 6.5.2  
+Tested up to: 6.8  
 Requires PHP: 5.6  
 Stable tag: 1.1.1  
 License: GPLv2 or later
@@ -30,7 +30,7 @@ Use the following shortcode to display the marquee anywhere on your site:
 `[mrtext]`
 
 
-** Upgrade to Pro **
+== **Upgrade to Pro** ==
 
 Want more flexibility and features? Upgrade to the **Pro version** of Marquee Running Text:
 
@@ -82,3 +82,7 @@ Want more flexibility and features? Upgrade to the **Pro version** of Marquee Ru
 * Settings link added.
 = 1.1.3 =
 * Upgrade to Pro link added, 
+= 1.1.4 =
+* Fix error.
+= 1.1.5 =
+* Get Pro button added.
