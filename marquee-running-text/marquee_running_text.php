@@ -3,7 +3,7 @@
 Plugin Name: Marquee Running Text
 Plugin URI: https://bongodevs.com/
 Description: Marquee Running Text plugin allows to make <strong> Marquee text at the top header</strong>, with fully customizable options. Most of all, it had to be responsive.
-Version: 1.1.5
+Version: 1.1.6
 Requires at least: 5.0
 Requires PHP: 5.6
 Author: Bongdevs

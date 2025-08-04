@@ -1,62 +1,69 @@
 === Marquee Running Text ===
-Contributors: jahid49, bongdevs  
-Donate link: https://www.buymeacoffee.com/hasanjahid  
-Tags: marquee, running text, text slider, slider, admin  
-Requires at least: 5.0  
-Tested up to: 6.8  
-Requires PHP: 5.6  
-Stable tag: 1.1.1  
+Contributors: jahid49, bongdevs
+Donate link: https://www.buymeacoffee.com/hasanjahid
+Tags: marquee, running text, text slider, slider, admin
+Requires at least: 5.0
+Tested up to: 6.8
+Requires PHP: 5.6
+Stable tag: 1.1.6
 License: GPLv2 or later
+License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
 Display eye-catching running text in your site's header effortlessly with the Marquee Running Text plugin.
 
 == Description ==
+**Marquee Running Text** is a lightweight and user-friendly WordPress plugin that lets you add customizable scrolling text to the top of your website's header. It's fully responsive and designed to work seamlessly with popular page builders—no coding required.
 
-**Marquee Running Text** is a lightweight and user-friendly WordPress plugin developed by Jahid Hasan. It allows you to add customizable marquee (scrolling) text to the top header of your website. The plugin is fully responsive and designed to work seamlessly with popular page builders — no coding required.
+### Features
+* **No setup needed:** Get started right away.
+* **Show/Hide option:** Easily toggle the marquee in the top header.
+* **Unlimited colors:** Customize the text and background to match your site's design.
+* **Multiple texts:** Add up to five individual marquee texts, each with its own link.
+* **Page builder support:** Works with popular page builders without any extra configuration.
+* **Shortcode:** Display the marquee anywhere on your site using `[mrtext]`.
 
-== Features ==
-
-*   No setup needed.
-*   Marquee at the top header (Show/Hide Option).
-*   Unlimited colors.
-*   Five marquee texts with individual links.
-*   Supports popular page builders.
-*   Shortcode available.
-
-== Shortcode ==
-
-Use the following shortcode to display the marquee anywhere on your site:
-
-`[mrtext]`
-
-
-== **Upgrade to Pro** ==
-
-Want more flexibility and features? Upgrade to the **Pro version** of Marquee Running Text:
-
-👉 [Download Marquee Running Text Pro](https://bongdevs.com/wp-assets/marquee-running-text-pro/)
-
-**Exclusive Pro Features:**
-
-* ✅ **Unlimited Marquees** – Create as many marquees as you want across various sections of your site.
-* 🎨 **Advanced Customization** – Choose custom fonts, background colors, animations, and more.
-* 🚀 **Enhanced Performance** – Lightweight, optimized code for smoother scrolling and faster performance.
-* 📞 **Priority Support** – Dedicated customer support for your questions and issues.
-* 🔄 **Regular Updates** – Stay up-to-date with the latest enhancements and features.
+---
 
 == Installation ==
 
-1. Unzip the download package.
-2. Upload the `marquee-running-text` folder to the `/wp-content/plugins/` directory.
-3. Activate the plugin through the "Plugins" menu in WordPress.
+### Automatic Installation
+1.  In your WordPress dashboard, go to **Plugins > Add New**.
+2.  Search for "Marquee Running Text."
+3.  Click **Install Now** and then **Activate**.
 
-= Manual Installation =
 
-1. Download Marquee Running Text plugin to your desktop.
-2. If downloaded as a zip archive, extract the plugin folder.
-3. Upload the extracted folder to your `/wp-content/plugins/` directory using an FTP program.
-4. Go to the Plugins screen and locate "Marquee Running Text".
-5. Click "Activate" to enable the plugin.
+### Manual Installation
+1.  Download the plugin to your desktop.
+2.  Unzip the package.
+3.  Using an FTP client, upload the `marquee-running-text` folder to the `/wp-content/plugins/` directory.
+4.  In your WordPress dashboard, go to the **Plugins** screen and click **Activate** next to "Marquee Running Text."
+
+---
+
+== Shortcode ==
+
+`[mrtext]`
+
+Use this shortcode to display the marquee anywhere on your site.
+
+### Usage
+* **In Posts/Pages:** Use the Shortcode block in the editor or simply type `[mrtext]`.
+* **In Widgets:** Add a Shortcode widget and paste `[mrtext]` into it.
+* **In Theme Files:** Add `<?php echo do_shortcode('[mrtext]'); ?>` to your theme's PHP files.
+
+---
+
+[Download Marquee Running Text Pro](https://bongdevs.com/wp-assets/marquee-running-text-pro/)
+
+### Exclusive Pro Features:
+
+* ✅ **Unlimited Marquees:** Create as many marquees as you want and place them in various sections of your site.
+* 🎨 **Advanced Customization:** Choose custom fonts, background colors, animation styles, and more.
+* 🚀 **Enhanced Performance:** Enjoy a smoother scrolling experience with lightweight, optimized code.
+* 📞 **Priority Support:** Get dedicated customer support for your questions and issues.
+* 🔄 **Regular Updates:** Stay up-to-date with the latest enhancements and features.
+
+---
 
 == Changelog ==
 
@@ -86,3 +93,5 @@ Want more flexibility and features? Upgrade to the **Pro version** of Marquee Ru
 * Fix error.
 = 1.1.5 =
 * Get Pro button added.
+= 1.1.6 =
+* Fix error.
