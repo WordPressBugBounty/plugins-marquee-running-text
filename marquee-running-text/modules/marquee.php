@@ -20,36 +20,36 @@ $mrtext_font_direction = get_option("mrtext_font_direction");
     echo '<style> 
 .runtext-container {
     background:' .
-    esc_html($mrtext_bg_color_option) .
+    esc_attr($mrtext_bg_color_option) .
         ';
     border: 1px solid ' .
-        esc_html($mrtext_bg_color_option) .
+        esc_attr($mrtext_bg_color_option) .
         ';
     }
 .runtext-container .holder a{ 
     color: ' .
-        esc_html($mrtext_color_option) .
+        esc_attr($mrtext_color_option) .
         ';
     font-size: ' .
-        esc_html($mrtext_font_size) .
+        esc_attr($mrtext_font_size) .
         ';
     font-weight: ' .
-        esc_html($mrtext_font_weight) .
+        esc_attr($mrtext_font_weight) .
         ';
 }
 .text-container a:before {
     background-color: ' .
-        esc_html($mrtext_color_option) .
+        esc_attr($mrtext_color_option) .
         ';
 }
 .runtext-container .holder a:hover{
 	color:' .
-        esc_html($mrtext_hover_color_option) .
+        esc_attr($mrtext_hover_color_option) .
         ';
 }
 .text-container a:hover::before {
     background-color: ' .
-        esc_html($mrtext_hover_color_option) .
+        esc_attr($mrtext_hover_color_option) .
         ';
 }
 </style>';

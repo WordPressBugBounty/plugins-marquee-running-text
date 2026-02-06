@@ -2,15 +2,17 @@
 /*
 Plugin Name: Marquee Running Text
 Plugin URI: https://bongodevs.com/
-Description: Marquee Running Text plugin allows to make <strong> Marquee text at the top header</strong>, with fully customizable options. Most of all, it had to be responsive.
-Version: 1.1.6
+Description: Marquee Running Text plugin allows to make <strong>Marquee text at the top header</strong>, fully customizable and responsive.
+Version: 1.1.7
 Requires at least: 5.0
 Requires PHP: 5.6
 Author: Bongdevs
 Author URI: http://bongdevs.com/about
 License: GPLv2 or later
+License URI: https://www.gnu.org/licenses/gpl-2.0.html
 Text Domain: mrtext
 */
+
 
 if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly 
 
@@ -33,8 +35,7 @@ function mrtext_admin_enqueue_scripts()
 add_action("admin_enqueue_scripts", "mrtext_admin_enqueue_scripts");
 
 
-/**
- * Add Settings and Pro Upgrade Links
+/** Add Settings and Pro Upgrade Links
  */
 function mrtext_action_links( $links ) {
     $settings_link = '<a href="' . esc_url( admin_url( 'admin.php?page=mrtext-settings' ) ) . '">' . __( 'Settings', 'mrtext' ) . '</a>';
@@ -62,7 +63,7 @@ add_filter( 'plugin_action_links_' . plugin_basename( __FILE__ ), 'mrtext_action
          require_once('modules/marquee.php');
      }
  }
- add_action("wp_head", "mrtext_add_marquee_header", 20);
+ add_action("wp_body_open", "mrtext_add_marquee_header");
  
 
 /*
@@ -84,16 +85,19 @@ function mrt_show_upgrade_notice() {
     if (!current_user_can('manage_options') || get_user_meta(get_current_user_id(), 'mrt_dismissed_notice', true)) {
         return;
     }
+    // Create a nonce for the dismiss action
+    $nonce = wp_create_nonce('mrt_dismiss_notice_nonce');
     ?>
     <div class="notice notice-info is-dismissible mrt-upgrade-notice">
         <p><strong>🚀 Upgrade to Marquee Running Text Pro!</strong><br>
         Unlock unlimited marquees, advanced customization, performance enhancements, and premium support.<br>
         👉 <a href="https://bongdevs.com/wp-assets/marquee-running-text-pro/" target="_blank" style="text-decoration: underline;">Click here to get the Pro version</a></p>
     </div>
-    <script>
+    <script type="text/javascript">
     jQuery(document).on('click', '.mrt-upgrade-notice .notice-dismiss', function () {
         jQuery.post(ajaxurl, {
-            action: 'mrt_dismiss_notice'
+            action: 'mrt_dismiss_notice',
+            nonce: '<?php echo $nonce; ?>'
         });
     });
     </script>
@@ -102,6 +106,10 @@ function mrt_show_upgrade_notice() {
 
 add_action('wp_ajax_mrt_dismiss_notice', 'mrt_dismiss_notice');
 function mrt_dismiss_notice() {
+    // Verify the nonce
+    if (!isset($_POST['nonce']) || !wp_verify_nonce($_POST['nonce'], 'mrt_dismiss_notice_nonce')) {
+        wp_die('Permission denied.');
+    }
     update_user_meta(get_current_user_id(), 'mrt_dismissed_notice', true);
     wp_die();
 }
