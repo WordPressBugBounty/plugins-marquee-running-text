@@ -5,7 +5,7 @@ Tags: marquee, news ticker, announcement bar, scrolling text, notification bar
 Requires at least: 6.3
 Tested up to: 7.1
 Requires PHP: 7.4
-Stable tag: 2.0.0
+Stable tag: 2.0.1
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -101,6 +101,10 @@ If a visitor has turned on "reduce motion" in their operating system, the marque
 3. A marquee with a "Breaking News" label on the front end.
 
 == Changelog ==
+
+= 2.0.1 =
+* Fix: the Upgrade link now opens the Marquee Running Text Pro pricing page.
+* Fix: removed the empty in-dashboard pricing page and the unused "Activate License" link (Pro licenses are activated in the Pro add-on).
 
 = 2.0.0 =
 * New: complete rebuild with a smooth, seamless animation engine (replaces the deprecated `<marquee>` tag).
