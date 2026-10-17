@@ -1,0 +1,25 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "marquee-running-text/marquee",
+	"version": "2.0.0",
+	"title": "Marquee Running Text",
+	"category": "widgets",
+	"icon": "megaphone",
+	"description": "Show a scrolling marquee (news ticker / announcement bar).",
+	"keywords": [ "marquee", "ticker", "news", "scrolling text", "announcement" ],
+	"textdomain": "marquee-running-text",
+	"attributes": {
+		"marqueeId": {
+			"type": "number",
+			"default": 0
+		}
+	},
+	"supports": {
+		"html": false,
+		"align": [ "wide", "full" ]
+	},
+	"editorScript": "file:./index.js",
+	"style": "mrtext",
+	"viewScript": "mrtext"
+}

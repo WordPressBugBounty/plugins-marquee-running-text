@@ -1,116 +1,75 @@
 <?php
-/*
-Plugin Name: Marquee Running Text
-Plugin URI: https://bongodevs.com/
-Description: Marquee Running Text plugin allows to make <strong>Marquee text at the top header</strong>, fully customizable and responsive.
-Version: 1.1.7
-Requires at least: 5.0
-Requires PHP: 5.6
-Author: Bongdevs
-Author URI: http://bongdevs.com/about
-License: GPLv2 or later
-License URI: https://www.gnu.org/licenses/gpl-2.0.html
-Text Domain: mrtext
-*/
-
-
-if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly 
-
-function mrtext_enqueue_scripts()
-{
-    wp_enqueue_style(
-        "mrtext-main",
-        plugin_dir_url(__FILE__) . "assets/css/mrtext-main.css"
-    );
-}
-add_action("wp_enqueue_scripts", "mrtext_enqueue_scripts");
-
-function mrtext_admin_enqueue_scripts()
-{
-    wp_enqueue_style(
-        "mrtext-admin",
-        plugin_dir_url(__FILE__) . "assets/css/mrtext-admin.css"
-    );
-}
-add_action("admin_enqueue_scripts", "mrtext_admin_enqueue_scripts");
-
-
-/** Add Settings and Pro Upgrade Links
- */
-function mrtext_action_links( $links ) {
-    $settings_link = '<a href="' . esc_url( admin_url( 'admin.php?page=mrtext-settings' ) ) . '">' . __( 'Settings', 'mrtext' ) . '</a>';
-    $pro_link = '<a href="https://bongdevs.com/wp-assets/marquee-running-text-pro/" target="_blank" style="font-weight: bold; color: #A31C23;">' . __( 'Get Pro', 'mrtext' ) . '</a>';
-
-    array_unshift( $links, $settings_link, $pro_link );
-
-    return $links;
-}
-add_filter( 'plugin_action_links_' . plugin_basename( __FILE__ ), 'mrtext_action_links' );
-
-
-/*
- * Plugin shortcode create
- */
-    require_once('modules/shortcode.php');
-/*
- * add marquee to header
+/**
+ * Plugin Name:       Marquee Running Text
+ * Plugin URI:        https://bongdevs.com/marquee-running-text/
+ * Description:       Smooth, accessible scrolling announcement bars and news tickers for your header, footer or any page — with a live-preview builder, shortcode, block and Elementor widget.
+ * Version:           2.0.0
+ * Requires at least: 6.3
+ * Requires PHP:      7.4
+ * Author:            Bongdevs
+ * Author URI:        https://bongdevs.com/about
+ * License:           GPLv2 or later
+ * License URI:       https://www.gnu.org/licenses/gpl-2.0.html
+ * Text Domain:       marquee-running-text
+ *
+ * @package MarqueeRunningText
  */
 
- function mrtext_add_marquee_header()
- {
-     $current_value = get_option("mrtext_radio", "show");
-     if ($current_value == "show") {
-         require_once('modules/marquee.php');
-     }
- }
- add_action("wp_body_open", "mrtext_add_marquee_header");
- 
+defined( 'ABSPATH' ) || exit;
 
-/*
- * Plugin Option Page Function
- */
+if ( function_exists( 'mrtext_fs' ) ) {
+	// Another copy of this plugin is already loaded.
+	return;
+} else {
+	// Keep this check: it makes the function_exists() call above work when both versions are active.
+	if ( ! function_exists( 'mrtext_fs' ) ) {
+		/**
+		 * Freemius SDK instance (licensing, updates and in-dashboard upgrades).
+		 *
+		 * @return Freemius
+		 */
+		function mrtext_fs() {
+			global $mrtext_fs;
 
- require_once('modules/options_page.php');
-/*
- * Plugin Callback
- */
+			if ( ! isset( $mrtext_fs ) ) {
+				require_once __DIR__ . '/vendor/freemius/start.php';
 
- require_once('modules/callback_function.php');
- 
+				$mrtext_fs = fs_dynamic_init(
+					array(
+						'id'                  => '22454',
+						'slug'                => 'marquee-running-text',
+						'type'                => 'plugin',
+						'public_key'          => 'pk_cb27fa3945468441664e01d2ddce3',
+						'is_premium'          => false,
+						'has_premium_version' => false,
+						'has_addons'          => true,
+						'has_paid_plans'      => false,
+						'is_org_compliant'    => true,
+						'menu'                => array(
+							'slug'    => 'mrtext-settings',
+							'support' => false,
+						),
+					)
+				);
+			}
 
+			return $mrtext_fs;
+		}
 
-add_action('admin_notices', 'mrt_show_upgrade_notice');
-function mrt_show_upgrade_notice() {
-    // Show only to admins and once per user
-    if (!current_user_can('manage_options') || get_user_meta(get_current_user_id(), 'mrt_dismissed_notice', true)) {
-        return;
-    }
-    // Create a nonce for the dismiss action
-    $nonce = wp_create_nonce('mrt_dismiss_notice_nonce');
-    ?>
-    <div class="notice notice-info is-dismissible mrt-upgrade-notice">
-        <p><strong>🚀 Upgrade to Marquee Running Text Pro!</strong><br>
-        Unlock unlimited marquees, advanced customization, performance enhancements, and premium support.<br>
-        👉 <a href="https://bongdevs.com/wp-assets/marquee-running-text-pro/" target="_blank" style="text-decoration: underline;">Click here to get the Pro version</a></p>
-    </div>
-    <script type="text/javascript">
-    jQuery(document).on('click', '.mrt-upgrade-notice .notice-dismiss', function () {
-        jQuery.post(ajaxurl, {
-            action: 'mrt_dismiss_notice',
-            nonce: '<?php echo $nonce; ?>'
-        });
-    });
-    </script>
-    <?php
+		mrtext_fs();
+		do_action( 'mrtext_fs_loaded' );
+	}
+
+	define( 'MRTEXT_VERSION', '2.0.0' );
+	define( 'MRTEXT_FILE', __FILE__ );
+	define( 'MRTEXT_DIR', plugin_dir_path( __FILE__ ) );
+	define( 'MRTEXT_URL', plugin_dir_url( __FILE__ ) );
+	define( 'MRTEXT_PRO_URL', 'https://bongdevs.com/marquee-running-text/pricing/' );
+
+	require_once MRTEXT_DIR . 'includes/class-mrtext-plugin.php';
+
+	MRText_Plugin::instance();
+
+	// Freemius reports uninstalls, so cleanup runs on its hook instead of uninstall.php.
+	mrtext_fs()->add_action( 'after_uninstall', array( 'MRText_Plugin', 'uninstall' ) );
 }
-
-add_action('wp_ajax_mrt_dismiss_notice', 'mrt_dismiss_notice');
-function mrt_dismiss_notice() {
-    // Verify the nonce
-    if (!isset($_POST['nonce']) || !wp_verify_nonce($_POST['nonce'], 'mrt_dismiss_notice_nonce')) {
-        wp_die('Permission denied.');
-    }
-    update_user_meta(get_current_user_id(), 'mrt_dismissed_notice', true);
-    wp_die();
-}
-?>

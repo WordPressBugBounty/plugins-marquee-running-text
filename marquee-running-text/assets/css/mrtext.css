@@ -1,0 +1,230 @@
+/* Marquee Running Text — front end */
+
+.mrtext {
+	--mrtext-bg: #000;
+	--mrtext-color: #fff;
+	--mrtext-hover: #c5c4c7;
+	--mrtext-sep: #fff;
+	--mrtext-label-bg: #d63638;
+	--mrtext-label-color: #fff;
+	--mrtext-font-size: 16px;
+	--mrtext-weight: 500;
+	--mrtext-height: 40px;
+	--mrtext-radius: 0px;
+	--mrtext-gap: 20px;
+
+	position: relative;
+	z-index: 1;
+	display: flex;
+	align-items: stretch;
+	box-sizing: border-box;
+	width: 100%;
+	height: var(--mrtext-height);
+	margin: 0;
+	padding: 0;
+	overflow: hidden;
+	border-radius: var(--mrtext-radius);
+	background: var(--mrtext-bg);
+	color: var(--mrtext-color);
+	font-size: var(--mrtext-font-size);
+	font-weight: var(--mrtext-weight);
+	line-height: 1.2;
+}
+
+.mrtext *,
+.mrtext *::before,
+.mrtext *::after {
+	box-sizing: border-box;
+}
+
+.mrtext[hidden] {
+	display: none !important;
+}
+
+.mrtext--sticky {
+	position: sticky;
+	top: var(--wp-admin--admin-bar--height, 0px);
+	z-index: 9990;
+}
+
+.mrtext--bottom {
+	position: fixed;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	z-index: 9990;
+}
+
+.mrtext__label {
+	position: relative;
+	z-index: 1;
+	display: flex;
+	flex: 0 0 auto;
+	align-items: center;
+	padding: 0 14px;
+	background: var(--mrtext-label-bg);
+	color: var(--mrtext-label-color);
+	font-weight: 700;
+	white-space: nowrap;
+}
+
+.mrtext__viewport {
+	display: flex;
+	flex: 1 1 auto;
+	align-items: center;
+	min-width: 0;
+	overflow: hidden;
+	direction: ltr;
+}
+
+.mrtext__track {
+	display: flex;
+	flex: 0 0 auto;
+	width: max-content;
+	will-change: transform;
+}
+
+.mrtext .mrtext__group {
+	display: flex;
+	flex: 0 0 auto;
+	align-items: center;
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+.mrtext .mrtext__item {
+	display: flex;
+	flex: 0 0 auto;
+	align-items: center;
+	margin: 0;
+	padding: 0 0 0 var(--mrtext-gap);
+	list-style: none;
+	white-space: nowrap;
+}
+
+.mrtext .mrtext__item::before,
+.mrtext .mrtext__item::marker {
+	content: none;
+}
+
+.mrtext .mrtext__link {
+	color: var(--mrtext-color);
+	font: inherit;
+	text-decoration: none;
+	box-shadow: none;
+	unicode-bidi: plaintext;
+}
+
+.mrtext a.mrtext__link:hover,
+.mrtext a.mrtext__link:focus {
+	color: var(--mrtext-hover);
+	text-decoration: none;
+}
+
+.mrtext a.mrtext__link:focus-visible {
+	outline: 2px solid currentColor;
+	outline-offset: 2px;
+}
+
+.mrtext__sep {
+	display: inline-flex;
+	flex: 0 0 auto;
+	align-items: center;
+	margin-right: calc(var(--mrtext-gap) / 2);
+	color: var(--mrtext-sep);
+	line-height: 1;
+}
+
+.mrtext__sep--dot::before {
+	content: "";
+	display: block;
+	width: 0.6875em;
+	height: 0.6875em;
+	border-radius: 50%;
+	background: currentColor;
+}
+
+.mrtext__sep--line::before {
+	content: "";
+	display: block;
+	width: 2px;
+	height: 1em;
+	background: currentColor;
+}
+
+.mrtext .mrtext__btn {
+	display: flex;
+	flex: 0 0 auto;
+	align-items: center;
+	justify-content: center;
+	width: var(--mrtext-height);
+	max-width: 48px;
+	min-height: 0;
+	margin: 0;
+	padding: 0;
+	border: 0;
+	border-radius: 0;
+	background: var(--mrtext-bg);
+	box-shadow: none;
+	color: var(--mrtext-color);
+	font: inherit;
+	font-size: 18px;
+	line-height: 1;
+	cursor: pointer;
+	-webkit-appearance: none;
+	appearance: none;
+}
+
+.mrtext .mrtext__btn:hover {
+	color: var(--mrtext-hover);
+}
+
+.mrtext .mrtext__btn:focus-visible {
+	outline: 2px solid currentColor;
+	outline-offset: -4px;
+}
+
+.mrtext__pause .mrtext__icon {
+	display: block;
+	width: 10px;
+	height: 12px;
+	border-right: 3px solid currentColor;
+	border-left: 3px solid currentColor;
+}
+
+.mrtext__pause[aria-pressed="true"] .mrtext__icon {
+	width: 0;
+	height: 0;
+	border-width: 6px 0 6px 10px;
+	border-style: solid;
+	border-color: transparent transparent transparent currentColor;
+}
+
+.mrtext--reduced .mrtext__viewport {
+	overflow-x: auto;
+	scrollbar-width: none;
+}
+
+.mrtext--reduced .mrtext__viewport::-webkit-scrollbar {
+	display: none;
+}
+
+@media (max-width: 767px) {
+	.mrtext--hide-mobile {
+		display: none !important;
+	}
+}
+
+@media (min-width: 768px) {
+	.mrtext--hide-desktop {
+		display: none !important;
+	}
+}
+
+@media print {
+	.mrtext--sticky,
+	.mrtext--bottom {
+		display: none !important;
+	}
+}
